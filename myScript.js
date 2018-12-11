@@ -1,10 +1,10 @@
 "use strict";
 //USER STORY DICE GAME
-//Objective of game is to Win all the MONEY before your HEALTH or your ENERGY reaches zero. -- made function check winner
-//Each Player places a bet on the number of drinks other player has to drink.
-//If player successfully drinks -- wins the bet, wins the pot(MONEY), gains some ENERGY but loses some HEALTH. 
-//IF player loses the bet -- loses the MONEY, loses the ENERGY.
-//If People bets the maximum(max die roll) and if player wins that bet, he wins the pot(MONEY) with the multiplier(die roll) and would be able to recover some health.
+//1) Objective of game is to Win all the MONEY before your HEALTH or your ENERGY reaches zero. -- made function check winner
+//2) Each Player places a bet on the number of drinks other player has to drink.
+//3) If player successfully drinks -- wins the bet, wins the pot(MONEY), gains some ENERGY but loses some HEALTH. 
+//4) IF player loses the bet -- loses the MONEY, loses the ENERGY.
+//5) If People bets the maximum(max die roll) and if player wins that bet, he wins the pot(MONEY) with the multiplier(die roll).
 
 
 
@@ -13,22 +13,22 @@ function dieRoll(numSides){
 	return dieRollNumber;
 }
 
-function placeBet(amount){
-	let betPlaced = dieRoll(amount);
-	return betPlaced;
-}
+// function placeBet(amount){
+// 	let betPlaced = dieRoll(amount);
+// 	return betPlaced;
+// }
 
-function drinkBeer(numBottles){
-	let beer2Drink = dieRoll(numBottles);
-	return beer2Drink;
-}
+// function drinkBeer(numBottles){
+// 	let beer2Drink = dieRoll(numBottles);
+// 	return beer2Drink;
+// }
 
-function beerDrunk(numBottles){
-	let bottlesDrunk = dieRoll(numBottles);
-	return bottlesDrunk;
-}
+// function beerDrunk(numBottles){
+// 	let bottlesDrunk = dieRoll(numBottles);
+// 	return bottlesDrunk;
+// }
 
-function dieRollMultiplier(numSides){
+function betMultiplier(){
 	let multiplier = dieRoll(4);
 	return multiplier;
 }
@@ -43,47 +43,109 @@ function changeEnergy(energy){
 	return energyChanged;
 }
 
+function checkMax(numSides, peopleBet){
+	if(peopleBet==numSides*5){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
 //This function runs the game
 function lastManStanding(){
-	let player1Money = 500;
-	let player2Money = 500;
+	let player1Money = 100;
+	let player2Money = 100;
 	let player1Health = 100;
 	let player2Health = 100;
 	let player1Energy = 100;
 	let player2Energy = 100;
-	let playerBet = placeBet(10)*10;
-	let peopleBet = placeBet(20)*10;
-	let totalBet = playerBet + peopleBet;
-	let player1DrinkDare = drinkBeer(6);
-	let player2DrinkDare = drinkBeer(6);
-	console.log("Round 1");
-	console.log("Player 1 challenges Player 2 to drink "+player2DrinkDare+" beer bottles.");
-	console.log("Bet placed by Player 1: $"+playerBet);
-	console.log("Bets placed by people: $"+peopleBet);
-	console.log("Total Pot is now: $"+totalBet);
-	let player1BottlesDrunk = beerDrunk(6);
-	let player2BottlesDrunk = beerDrunk(6);
-
+	let round = 0;
 	while(player1Health > 0 && player1Money > 0 && player1Energy > 0 && player2Health > 0 && player2Money > 0 && player2Energy > 0){
-		if(player2BottlesDrunk >= player2DrinkDare)
-		{
-			player2Money += totalBet;
-			player1Money -= playerBet; 
-			console.log("Player 2 successfully drank "+player2DrinkDare+" bottles");
-			console.log("Player 2 Wins the Pot");
-			console.log("Player 2 Total money is now: $"+player2Money);	
+		round++;
+		console.log("%cRound"+round, "background: rgba(0,0,200,0.3); color: yellow");
+		let playerBet = dieRoll(10)*5;
+		let peopleBet = dieRoll(20)*5;
+		let totalBet = playerBet*2 + peopleBet;
+		let player1DrinkDare = dieRoll(6);
+		let player2DrinkDare = dieRoll(6);
+		let player1BottlesDrunk = dieRoll(6);
+		let player2BottlesDrunk = dieRoll(6);
+		
+		if(round % 2 == 1){
+			console.log("Player 1 challenges Player 2 to drink "+player2DrinkDare+" beer bottles.");
+			console.log("Bet placed by each player : $"+playerBet);
+			console.log("Bets placed by people: $"+peopleBet);
+			console.log("Total Pot is now: $"+totalBet);
+			if(checkMax(20, peopleBet))
+			{
+				let multiplier = dieRoll(4);
+				console.log("People have bet the MAXIMUM!, winning money is "+multiplier+" times now!");
+				totalBet = totalBet*multiplier;
+			}
+			if(player2BottlesDrunk >= player2DrinkDare)
+				{
+			
+					player2Money += totalBet;
+					player1Money -= playerBet;
+					player2Health -= changeHealth(12);
+					player2Energy += changeEnergy(8);
+					player1Energy -= changeEnergy(8);
+					console.log("Player 2 successfully drank "+player2DrinkDare+" bottles");
+					console.log("Player 2 Wins the bet");
+					console.log("Player 2 Current Money: $"+player2Money+" Player 1 Current Money: $"+player1Money);	
+					console.log("Player 2 lost some health, current health is: "+player2Health);
+				}
+				else
+				{
+					player1Money += totalBet;
+					player2Money -= playerBet;
+					player2Health -= changeHealth(12);
+					console.log("Player 2 was unable to drink "+player2DrinkDare+" bottles");
+					console.log("Player 1 Wins the bet");
+					console.log("PLayer 1 Money is now: $"+player1Money);
+					console.log("Player 2 Money is now: $"+player2Money);
+					console.log("Player 2 lost some health, Current Health is: "+player2Health);
+				}
 		}
-		else
-		{
-			player1Money += totalBet;
-			player2Money -= playerBet;
-			player2Health -= changeHealth(12);
-			console.log("Player 2 loses the bet");
-			console.log("Player 2 Money is now: $"+player2Money);
-			console.log("Player 2 lost some health, Current Health is: "+player2Health);
+		else if(round % 2 == 0){
+			console.log("Player 2 challenges Player 1 to drink "+player1DrinkDare+" beer bottles.");
+			console.log("Bet placed by each player: $"+playerBet);
+			console.log("Bets placed by people: $"+peopleBet);
+			console.log("Total Pot is now: $"+totalBet);
+			if(checkMax(20, peopleBet))
+			{
+				let multiplier = dieRoll(4);
+				console.log("People have bet the MAXIMUM!, winning money is "+multiplier+" times now!");
+				totalBet = totalBet*multiplier;
+			}
+
+			if(player1BottlesDrunk >= player1DrinkDare)
+			{
+			
+				player1Money += totalBet;
+				player2Money -= playerBet; 
+				player1Health -= changeHealth(12);
+				console.log("Player 1 successfully drank "+player1DrinkDare+" bottles");
+				console.log("Player 1 Wins the bet");
+				console.log("Player 1 Money is now: $"+player1Money);
+				console.log("Player 2 Money is now: $"+player2Money);
+				console.log("Player 1 lost some health, current health is: "+player1Health);	
+			}
+			else
+			{
+				player2Money += totalBet;
+				player1Money -= playerBet;
+				player1Health -= changeHealth(12);
+				console.log("Player 1 was unable to drink "+player1DrinkDare+" bottles");
+				console.log("Player 2 wins the bet");
+				console.log("Player 2 Money is now: $"+player2Money);
+				console.log("Player 1 Money is now: $"+player1Money);
+				console.log("Player 1 lost some health, Current Health is: "+player1Health);
+			}
 		}
 	}
-	checkWinner(player1Health, player2Health. player1Money, player2Money, player1Energy, player2Energy);
+	checkWinner(player1Health, player2Health, player1Money, player2Money, player1Energy, player2Energy);
 }
 
 	
@@ -91,20 +153,19 @@ function lastManStanding(){
 
 function checkWinner(player1Health, player2Health, player1Money, player2Money, player1Energy, player2Energy){
 
-	if(player1Health == 0 || player1Money == 0 || player1Energy == 0)
+	if(player1Health <= 0 || player1Money <= 0 || player1Energy <= 0)
 	{
 		console.log("Player 1 lost the game");
 		console.log("PLAYER 2 WINS !");
 	}
-	else if(player2Health == 0 || player2Money == 0 || player2Energy == 0)
+	else if(player2Health <= 0 || player2Money <= 0 || player2Energy <= 0)
 	{
 		console.log("Player 2 lost the game");
-		console.log("PLAYER 1 WINS !")
+		console.log("PLAYER 1 WINS !");
 	}
-
 }
 
-function roundCount(){
-	let round = 1;
+function checkMoney(player1Money, player2Money){
+
 
 }

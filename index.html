@@ -1,11 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<title>DICE GAME IN JAVASCRIPT</title>
 </head>
 <body>
-	<h1>DICE GAME</h1>
-	<button onclick="lastManStanding()">Click to Begin Round 1</button>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<h1><center>DICE GAME</center></h1><br>
+				<h2>RULES</h2>
+				<p>Objective of the game is to win all the MONEY before your HEALTH or ENERGY reaches zero.</p>
+				<p>Each player places a bet on the number of bottles opponent has to drink.</p>
+				<p>If a player drinks successfully, player WINS the Round by winning the total Money Pot, gains ENERGY but loses HEALTH</p>
+				<p>If a player loses the bet, in turn loses the ENERGY, loses the MONEY and also loses the HEALTH.</p>
+				<p>BONUS ! - If people bet the MAXIMUM in a round, winning player will win the pot with the decided Multiplier(2x, 3x or 4x).</p>
+			</div>
+		</div>
+	<div><br>
+	<div class="row">
+		<div class="col-sm-11.99">
+			<button onclick="lastManStanding()">ClICK TO BEGIN</button>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+			</div>
+		</div>
+	</div>
 
 <script src="myScript.js"></script>
 </body>
