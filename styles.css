@@ -41,9 +41,9 @@ button {
 
 p{
 	font-family: 'helvetica neue', helvetica, sans-serif;
-	text-shadow: all;
 	font-size: 25px;
 	font: bolder;
+
 }
 .col-sm-12{
 	border: 2px solid rgba(0,0,200,0.6);
@@ -54,3 +54,18 @@ p{
   	display: inline-block;
   	color: #fff2cc;
   }
+
+.text{
+	font-family: impact;
+	font-size: 40px;
+	background: rgba(0,0,200,0.3);
+	display: inline-block;
+	color: white;
+}
+h3{
+	font-family: impact;
+	font-size: 55px;
+	background: rgba(0,0,200,0.3);
+	display: inline-block;
+	color: red;
+}
