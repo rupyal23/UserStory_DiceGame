@@ -105,6 +105,8 @@ function lastManStanding(){
 					player1Money += totalBet;	//if player 2 unable to win challenge
 					player2Money -= changePlayer2Bet;
 					player2Health -= changeHealth(12);
+					player2Energy -= changeEnergy(8);
+					player1Energy += changeEnergy(8);
 					console.log("PLAYER 2 was unable to drink "+player2DrinkDare+" bottles");
 					console.log("PLAYER 1 Wins the bet");
 					console.log("PLAYER 1 MONEY is now: $"+player1Money);
@@ -130,6 +132,8 @@ function lastManStanding(){
 					player1Money += totalBet;
 					player2Money -= changePlayer2Bet; 
 					player1Health -= changeHealth(12);
+					player2Energy -= changeEnergy(8);
+					player1Energy += changeEnergy(8);
 					console.log("PLAYER 1 successfully drank "+player1DrinkDare+" bottles");
 					console.log("PLAYER 1 Wins the bet");
 					console.log("PLAYER 1 MONEY is now: $"+player1Money);
@@ -141,6 +145,8 @@ function lastManStanding(){
 					player2Money += totalBet;
 					player1Money -= changePlayer1Bet;
 					player1Health -= changeHealth(12);
+					player2Energy += changeEnergy(8);
+					player1Energy -= changeEnergy(8);
 					console.log("PLAYER 1 was unable to drink "+player1DrinkDare+" bottles");
 					console.log("PLAYER 2 wins the bet");
 					console.log("PLAYER 1 MONEY is now: $"+player1Money);
@@ -160,13 +166,13 @@ function checkWinner(player1Health, player2Health, player1Money, player2Money, p
 	if(player1Health <= 0 || player1Money <= 0 || player1Energy <= 0)
 	{
 		console.log("PLAYER 1 LOST THE GAME");
-		console.log("%cPLAYER 2 WINS !", "font-family: impact; font-size:35px;letter-spacing: 1px");
+		console.log("%cPLAYER 2 WINS !", "font-family: impact; font-size: 35px; background: rgba(0,0,200,0.3); color: red;");
 		document.getElementById("displayWin").innerHTML = "PLAYER 2 WINS. GAME OVER"
 	}
 	else if(player2Health <= 0 || player2Money <= 0 || player2Energy <= 0)
 	{
 		console.log("PLAYER 2 LOST THE GAME");
-		console.log("%cPLAYER 1 WINS !","font-family: impact;font-size: 35px;letter-spacing: 1px");
+		console.log("%cPLAYER 1 WINS !","font-family: impact; font-size: 35px; background: rgba(0,0,200,0.3); color: red;");
 		document.getElementById("displayWin").innerHTML = "PLAYER 1 WINS. GAME OVER"
 	}
 }
