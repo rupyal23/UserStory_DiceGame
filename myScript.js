@@ -16,6 +16,9 @@ function dieRoll(numSides){
 
 function betMultiplier(){
 	let multiplier = dieRoll(4);
+	if(multiplier == 1){
+		multiplier = dieRoll(4)
+	}
 	return multiplier;
 }
 
@@ -65,9 +68,9 @@ function lastManStanding(){
 			console.log("Total Pot is now: $"+totalBet);
 			if(checkMax(20, peopleBet))					// checks for if people placed the maximum bet
 			{
-				let multiplier = dieRoll(4);
-				console.log("%cPeople have bet the MAXIMUM!, winning money is "+multiplier+" times now!", "background: rgba(0,0,200,0.3); color: red");
-				totalBet = totalBet*multiplier;			// if people placed the max bet, total pot will get increased as per the multiplier
+				let multiplierNum = betMultiplier();
+				console.log("%cPeople have bet the MAXIMUM!, winning money is "+multiplierNum+" times now!", "background: rgba(0,0,200,0.3); color: red");
+				totalBet = totalBet*multiplierNum;			// if people placed the max bet, total pot will get increased as per the multiplier
 			}
 			if(player2BottlesDrunk >= player2DrinkDare) //if player 2 successfully wins the challenge
 				{
@@ -102,9 +105,9 @@ function lastManStanding(){
 			console.log("Total Pot is now: $"+totalBet);
 			if(checkMax(20, peopleBet))
 				{
-					let multiplier = dieRoll(4);
-					console.log("%cPeople have bet the MAXIMUM!, winning money is "+multiplier+" times now!", "background: rgba(0,0,200,0.3); color: red");
-					totalBet = totalBet*multiplier;
+					let multiplierNum = betMultiplier();
+					console.log("%cPeople have bet the MAXIMUM!, winning money is "+multiplierNum+" times now!", "background: rgba(0,0,200,0.3); color: red");
+					totalBet = totalBet*multiplierNum;
 				}
 
 			if(player1BottlesDrunk >= player1DrinkDare)			//if player 1 wins the challenge
