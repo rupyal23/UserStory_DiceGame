@@ -23,11 +23,13 @@ function betMultiplier(){
 	return multiplier;
 }
 
+//called dieRoll to change health
 function changeHealth(value){
 	let healthChanged = dieRoll(value);
 	return healthChanged;
 }
 
+//called dieRoll to change Energy levels
 function changeEnergy(energy){
 	let energyChanged = dieRoll(energy);
 	return energyChanged;
@@ -35,7 +37,7 @@ function changeEnergy(energy){
 
 //checks for the bet placed by people, if its max bet or not.
 function checkMax(numSides, peopleBet){
-	if(peopleBet==numSides*2){
+	if(peopleBet==numSides*2){					//as people bet is 2 times the dieroll output. so its been checked if its max.
 		return true;
 	}
 	else{
@@ -155,7 +157,7 @@ function lastManStanding(){
 				}
 		}
 	}
-	checkWinner(player1Health, player2Health, player1Money, player2Money, player1Energy, player2Energy);
+	checkWinner(player1Health, player2Health, player1Money, player2Money, player1Energy, player2Energy); //checks for winner after each round
 }
 
 	
